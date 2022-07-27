@@ -1,57 +1,23 @@
-import React, { useState } from "react";
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login'
+import Register from './pages/Register'
+
 
 const App = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+	return (
+		<div>
+			<BrowserRouter>
+                <Routes>
 
-  async function registerUser(event) {
-    event.preventDefault();
+				    <Route path='/login' element={<Login />}></Route>
+				    <Route path='/register' element={<Register />}></Route>
+			
+			
+                </Routes>
+			</BrowserRouter>
+		</div>
+	)
+}
 
-    const response = await fetch("http://localhost/3005/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
-
-    const data = await response.json();
-    console.log(data);
-  }
-
-  return (
-    <div>
-      <h1>Registration</h1>
-      <form onSubmit={registerUser}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        />
-        <br />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <br />
-        <input
-          type="text"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <input type="submit" value="Register" />
-      </form>
-    </div>
-  );
-};
-
-export default App;
+export default App
